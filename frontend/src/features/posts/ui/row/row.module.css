@@ -1,0 +1,77 @@
+.wrapper {
+	height: 40px;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	display: grid;
+	grid-template-columns: 50px calc(40% - 12.5px) calc(15% - 12.5px) calc(20% - 12.5px) calc(25% - 12.5px);
+}
+
+.openIconWrapper {
+	display: flex;
+	height: 40px;
+	width: 50px;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.openIcon {
+	height: 0;
+	width: 0;
+	transition: 0.3s all;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 12px solid #b9b8b8;
+}
+
+.openIcon.open {
+	rotate: 90deg;
+}
+
+.block {
+	padding-left: 20px;
+	display: flex;
+	align-items: center;
+	max-width: 90%;
+}
+
+.text {
+	color: grey;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	margin: 0;
+}
+
+.category {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.description {
+	width: 100%;
+	box-sizing: border-box;
+	background-color: white;
+	border-radius: 5px;
+	max-height: 0;
+	opacity: 0;
+	transition: 0.5s all;
+	overflow: hidden;
+}
+
+.description.open {
+	max-height: 500px;
+	opacity: 1;
+	overflow: auto;
+}
+
+.descriptionTitle,
+.descriptionText {
+	margin: 20px;
+	color: gray;
+	font-size: 16px;
+}
+

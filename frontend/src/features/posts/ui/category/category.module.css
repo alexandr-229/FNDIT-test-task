@@ -1,0 +1,23 @@
+.wrapper {
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 135%;
+	padding: 0 10px;
+	height: 24px;
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.wrapper.yellow {
+	color: #FFAB00;
+	background: rgba(255, 171, 0, 0.20);
+}
+
+.wrapper.green {
+	background: rgba(131, 225, 69, 0.20);
+	color: #83E145;
+}

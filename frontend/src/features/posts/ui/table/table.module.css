@@ -1,0 +1,11 @@
+.wrapper {
+	border-radius: 5px;
+	width: 100%;
+}
+
+.items {
+	margin-top: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
