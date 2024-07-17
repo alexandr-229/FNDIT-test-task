@@ -2,6 +2,8 @@ import cron from 'node-cron'
 import Parser from 'rss-parser';
 import { PostModel } from './models/post';
 import { GetAllPostsResult } from './types/get-all-posts.types';
+import { Post } from '../../types/post';
+import { formatPost } from './helpers/post';
 
 export class PostsService {
 	async parseRSS() {
@@ -57,17 +59,7 @@ export class PostsService {
 					.countDocuments()
 			]);
 
-			const data = posts.map((post) => {
-				const { _id, ...rest } = post.toJSON();
-				if ('__v' in rest) {
-					delete rest['__v']
-				}
-
-				return {
-					id: _id,
-					...rest,
-				}
-			});
+			const data = posts.map(formatPost);
 
 			const result: GetAllPostsResult = {
 				data,
@@ -82,6 +74,22 @@ export class PostsService {
 		} catch (error) {
 			console.log('Failed to get all posts:', error);
 			return [null, 'Failed to get all posts'];
+		}
+	}
+
+	async getPost(id: string): Promise<[Post | null, string | null]> {
+		try {
+			const post = await PostModel.findById(id);
+			if (!post) {
+				return [null, 'Post not found'];
+			}
+
+			const result = formatPost(post)
+
+			return [result, null];
+		} catch (error) {
+			console.log('Failed to get post:', error);
+			return [null, 'Failed to get post'];
 		}
 	}
 }

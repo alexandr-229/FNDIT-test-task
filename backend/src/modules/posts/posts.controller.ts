@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { PostsService } from './posts.service';
 import { GetAllPostsQuery } from './types/get-all-posts.types';
+import { GetPostParams } from './types/get-post.types';
 
 export class PostsController {
 	constructor(private readonly postsService: PostsService) {}
@@ -28,9 +29,15 @@ export class PostsController {
 		}
 	}
 
-	async getPost(req: Request, res: Response) {
+	async getPost(req: Request<GetPostParams>, res: Response) {
 		try {
-			return res.json({ message: 'Get post' })
+			const { id } = req.params;
+			const [post, error] = await this.postsService.getPost(id);
+			if (error) {
+				return res.status(500).json({ message: error });
+			}
+
+			return res.json(post)
 		} catch (error) {
 			console.log('Failed to get post:', error);
 			return res.status(500).json({ message: 'Something went wrong' });
