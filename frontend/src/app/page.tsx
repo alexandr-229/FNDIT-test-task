@@ -1,6 +1,10 @@
+import { PostsList } from '@/features/posts/ui/main/main';
+
 const HomePage = () => {
   return (
-    <main></main>
+    <main>
+      <PostsList />
+    </main>
   );
 };
 
