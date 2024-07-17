@@ -1,0 +1,13 @@
+.header {
+	margin-bottom: 20px;
+}
+
+.title {
+	color: gray;
+	font-size: 24px;
+	margin: 0;
+}
+
+.count {
+	font-weight: 600;
+}
