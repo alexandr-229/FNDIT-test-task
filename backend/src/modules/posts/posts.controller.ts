@@ -43,4 +43,14 @@ export class PostsController {
 			return res.status(500).json({ message: 'Something went wrong' });
 		}
 	}
+
+	async parseRSS(req: Request, res: Response) {
+		try {
+			await this.postsService.parseRSS();
+			return res.json({ message: 'OK' });
+		} catch (error) {
+			console.log('Failed to parse RSS:', error);
+			return res.status(500).json({ message: 'Failed to parse RSS' });
+		}
+	}
 }

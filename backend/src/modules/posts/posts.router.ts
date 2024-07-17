@@ -8,3 +8,4 @@ const postsController = new PostsController(new PostsService());
 
 postsRouter.get('/all', postsController.getAllPosts.bind(postsController))
 postsRouter.get('/:id', postsController.getPost.bind(postsController))
+postsRouter.post('/parse', postsController.parseRSS.bind(postsController))
