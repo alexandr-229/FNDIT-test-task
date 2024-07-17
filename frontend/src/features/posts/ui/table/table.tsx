@@ -4,9 +4,9 @@ import { TableHeader } from '../table-header/table-header';
 import { TableProps } from './table.props';
 import { TableSkeleton } from '../table-skeleton/table-skeleton';
 
-export const Table = ({ posts, loading }: TableProps) => {
+export const Table = ({ posts, loading, pageCount }: TableProps) => {
 	if (loading) {
-		return <TableSkeleton />
+		return <TableSkeleton pageCount={pageCount} />
 	}
 
 	return (

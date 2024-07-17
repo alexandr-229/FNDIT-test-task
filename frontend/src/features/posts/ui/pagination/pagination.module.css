@@ -1,0 +1,35 @@
+.wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.block {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.text {
+	font-size: 16px;
+	color: gray;
+}
+
+.arrows {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.leftArrow,
+.rightArrow {
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.leftArrow {
+	rotate: 180deg;
+	margin-top: -5px;
+}

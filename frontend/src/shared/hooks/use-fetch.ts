@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useFetch = <T = unknown>(url: string) => {
+export const useFetch = <T = unknown>(url: string, delay?: number) => {
 	const [response, setResponse] = useState<T>();
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string>();
@@ -9,6 +9,12 @@ export const useFetch = <T = unknown>(url: string) => {
 		getData()
 	}, [url]);
 
+	const sleep = (ms: number) => new Promise<void>((resolve) => {
+		setTimeout(() => {
+			resolve();
+		}, ms);
+	});
+
 	const getData = async () => {
 		try {
 			setLoading(true);
@@ -16,6 +22,10 @@ export const useFetch = <T = unknown>(url: string) => {
 
 			const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}${url}`);
 			const result: T = await response.json();
+
+			if (delay) {
+				await sleep(delay);
+			}
 
 			setResponse(result);
 		} catch (error) {

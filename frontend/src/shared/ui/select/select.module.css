@@ -1,0 +1,46 @@
+.selectedWrapper {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px;
+	border-radius: 7px;
+	cursor: pointer;
+	border: 1px solid rgba(128, 128, 128, 0.5);
+	position: relative;
+}
+
+.label {
+	margin: 0;
+	color: gray;
+	font-size: 15px;
+}
+
+.items {
+	width: 100%;
+	border-radius: 7px;
+	overflow: hidden;
+	position: absolute;
+	bottom: 120%;
+	left: 0;
+	transition: 0.2s all;
+}
+
+.items.open {
+	border: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.item {
+	padding: 5px;
+	transition: 0.3s all;
+	background-color: #eee;
+}
+
+.item:hover {
+	background-color: #d2d0d0;
+}
+
+.item p {
+	margin: 0;
+	color: gray;
+	font-size: 15px;
+}

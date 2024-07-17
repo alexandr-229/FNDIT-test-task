@@ -34,7 +34,7 @@ export const useGetPosts = () => {
 		return result;
 	}, [search, pagination]);
 
-	const { response, loading } = useFetch<PostsResponse>(url);
+	const { response, loading } = useFetch<PostsResponse>(url, 500);
 
 	const posts = response?.data || [];
 
