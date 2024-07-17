@@ -1,5 +1,6 @@
 import cron from 'node-cron'
 import Parser from 'rss-parser';
+import { PostModel } from './models/post';
 
 export class PostsService {
 	async parseRSS() {
@@ -12,14 +13,30 @@ export class PostsService {
 
 			const feed = await parser.parseURL(url);
 			const posts = feed.items.map((item) => ({
+				title: item.title || '',
 				creator: item.creator,
-				title: item.title,
 				publishDate: item.pubDate,
+				categories: item.categories || [],
 				content: item['content:encodedSnippet'],
-				categories: item.categories,
 			}));
 
-			// save posts
+			const promises = posts.map(async (post) => {
+				const existsPost = await PostModel.findOne({
+					creator: post.creator,
+					publishDate: post.publishDate,
+				});
+
+				if (existsPost) {
+					existsPost.title = post.title;
+					existsPost.content = post.content;
+					existsPost.categories = post.categories;
+				} else {
+					await PostModel.create(post);
+				}
+			});
+
+			await Promise.all(promises);
+			console.log('RSS parsed')
 		} catch (error) {
 			console.log('Failed to parse RSS:', error);
 		}
@@ -27,4 +44,4 @@ export class PostsService {
 }
 
 const postsService = new PostsService();
-cron.schedule('* * * * * *', postsService.parseRSS)
+cron.schedule('0 * * * *', postsService.parseRSS)
